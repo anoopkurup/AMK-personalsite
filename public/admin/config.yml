@@ -1,0 +1,23 @@
+# NOTE: update `repo` after the GitHub repo is created
+backend:
+  name: github
+  repo: anoopkurup/AMK-personalsite
+  branch: main
+  base_url: https://api.netlify.com
+
+media_folder: public/images
+public_folder: /images
+
+collections:
+  - name: blog
+    label: Blog posts
+    folder: src/content/blog
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields: [date, title]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Description, name: description, widget: string, required: false }
+      - { label: Body, name: body, widget: markdown }

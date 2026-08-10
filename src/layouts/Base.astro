@@ -1,0 +1,58 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/fraunces';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const siteTitle = 'Anoop Kurup';
+const pageTitle = title ? `${title} — ${siteTitle}` : siteTitle;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta
+      name="description"
+      content={description ??
+        'Daily observations and thoughts — on life, running a business, Bangalore, culture, and trends.'}
+    />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="site-title" href="/">{siteTitle}</a>
+        <nav class="site-nav">
+          <a href="/">Home</a>
+          <a href="/archive/">Archive</a>
+          <a href="/about/">About</a>
+        </nav>
+      </div>
+    </header>
+    <main class="wrap">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="newsletter">
+          <h2>Get new posts by email</h2>
+          <p>Occasional-to-daily notes, straight to your inbox.</p>
+          <!-- SendFox embed: paste your form's embed code from sendfox.com below -->
+          <p>
+            <a href="https://sendfox.com" rel="noopener">Subscribe via SendFox</a>
+          </p>
+        </div>
+        <small>© {new Date().getFullYear()} Anoop Kurup · Bangalore, India</small>
+      </div>
+    </footer>
+  </body>
+</html>

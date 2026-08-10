@@ -1,0 +1,35 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../layouts/Base.astro';
+import { getPosts, excerpt, formatDate } from '../lib/blog';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  return paginate(await getPosts(), { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<Base>
+  {
+    page.data.map((post) => (
+      <article class="post-item">
+        <h2>
+          <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+        </h2>
+        <p class="post-meta">
+          <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+        </p>
+        <p>{excerpt(post)}</p>
+      </article>
+    ))
+  }
+  {
+    (page.url.prev || page.url.next) && (
+      <nav class="pagination">
+        <span>{page.url.prev && <a href={page.url.prev}>← Newer posts</a>}</span>
+        <span>{page.url.next && <a href={page.url.next}>Older posts →</a>}</span>
+      </nav>
+    )
+  }
+</Base>

@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import { getPosts } from '../lib/blog';
+
+const posts = await getPosts();
+const byMonth = new Map<string, typeof posts>();
+for (const post of posts) {
+  const key = post.data.date.toLocaleDateString('en-IN', {
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'Asia/Kolkata',
+  });
+  byMonth.set(key, [...(byMonth.get(key) ?? []), post]);
+}
+---
+
+<Base title="Archive">
+  <h1>Archive</h1>
+  {
+    [...byMonth.entries()].map(([month, monthPosts]) => (
+      <section class="archive-month">
+        <h2>{month}</h2>
+        <ul class="archive-list">
+          {monthPosts.map((post) => (
+            <li>
+              <time datetime={post.data.date.toISOString()}>
+                {post.data.date.toLocaleDateString('en-IN', {
+                  day: '2-digit',
+                  month: 'short',
+                  timeZone: 'Asia/Kolkata',
+                })}
+              </time>
+              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Base>
