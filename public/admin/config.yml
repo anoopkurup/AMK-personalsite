@@ -1,4 +1,3 @@
-# NOTE: update `repo` after the GitHub repo is created
 backend:
   name: github
   repo: anoopkurup/AMK-personalsite
