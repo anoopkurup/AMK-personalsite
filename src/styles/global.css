@@ -4,6 +4,7 @@
   --paper: #fbf9f2;
   --parchment: #f3efe4;
   --ink: #2e3c36;
+  --muted: #6b7a72;
   --amber: #b45309;
   --amber-deep: #92400e;
   --hairline: #e3ddcc;
@@ -22,6 +23,9 @@ body {
   font-family: var(--sans);
   font-size: 1.0625rem;
   line-height: 1.7;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 :focus-visible {
@@ -47,13 +51,21 @@ a:hover {
 h1, h2, h3 {
   font-family: var(--display);
   color: var(--green);
-  line-height: 1.25;
-  margin: 1.5em 0 0.5em;
+  line-height: 1.2;
+  letter-spacing: -0.014em;
+  font-weight: 500;
+  margin: 1.6em 0 0.4em;
 }
 
-h1 { font-size: 2rem; margin-top: 0; }
-h2 { font-size: 1.4rem; }
-h3 { font-size: 1.15rem; }
+h1 {
+  font-size: 2.35rem;
+  line-height: 1.1;
+  letter-spacing: -0.022em;
+  font-weight: 560;
+  margin-top: 0;
+}
+h2 { font-size: 1.55rem; }
+h3 { font-size: 1.2rem; letter-spacing: -0.008em; }
 
 p, ul, ol, blockquote {
   margin-bottom: 1em;
@@ -173,10 +185,12 @@ main { min-height: 60vh; padding-bottom: 3rem; }
 .post-item h2 a:hover { color: var(--amber-deep); }
 
 .post-meta {
-  font-size: 0.85rem;
-  color: var(--green-deep);
-  opacity: 0.8;
-  margin-bottom: 0.35rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 0.4rem;
 }
 
 .tag-list {
@@ -228,8 +242,8 @@ main { min-height: 60vh; padding-bottom: 3rem; }
   flex-shrink: 0;
   width: 5.5rem;
   font-size: 0.85rem;
-  color: var(--green-deep);
-  opacity: 0.8;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
 /* Newsletter */
